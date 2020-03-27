@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Magazzino MVC - New Category</title>
+</head>
+<a href="http://localhost:8080/magazzino/products">Lista prodotti</a> -
+<a href="http://localhost:8080/magazzino/stock">Lista stock</a> -
+<a href="http://localhost:8080/magazzino/newstock">Aggiungi stock</a> -
+<a href="http://localhost:8080/magazzino/categories">Lista categorie</a> -
+<a href="http://localhost:8080/magazzino/subcategories">Lista sottocategorie</a> -
+<a href="http://localhost:8080/magazzino/newproduct">Aggiungi un prodotto</a> -
+<a href="http://localhost:8080/magazzino/newcategory">Aggiungi una categoria</a> -
+<a href="http://localhost:8080/magazzino/newsubcategory">Aggiungi una sottocategoria</a>
+<body>
+<h1> Modifica la sottocategoria </h1>
+<form th:action="@{/magazzino/editsubcategory/{id}(id = ${subCategoryToEdit.id})}" th:object="${subCategoryToEdit}" method="post">
+    <input type="hidden" th:value="${subCategoryToEdit.id}" th:field="${subCategoryToEdit.id}" th:required="required">
+    <p>Nome</p>
+    <input type="text" th:value="${subCategoryToEdit.name}" th:field="${subCategoryToEdit.name}" th:required="required">
+    <p>Descrizione</p>
+    <input type="text" th:value="${subCategoryToEdit.description}" th:field="${subCategoryToEdit.description}" th:required="required">
+    <select th:field="*{category.id}">
+        <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+    </select>
+    <button>Aggiorna</button>
+</form>
+</body>
+</html>

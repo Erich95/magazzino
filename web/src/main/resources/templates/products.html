@@ -1,0 +1,39 @@
+<html>
+<head>
+
+    <title>Magazzino MVC</title>
+</head>
+<a href="http://localhost:8080/magazzino/products">Lista prodotti</a> -
+<a href="http://localhost:8080/magazzino/stock">Lista stock</a> -
+<a href="http://localhost:8080/magazzino/newstock">Aggiungi stock</a> -
+<a href="http://localhost:8080/magazzino/categories">Lista categorie</a> -
+<a href="http://localhost:8080/magazzino/subcategories">Lista sottocategorie</a> -
+<a href="http://localhost:8080/magazzino/newproduct">Aggiungi un prodotto</a> -
+<a href="http://localhost:8080/magazzino/newcategory">Aggiungi una categoria</a> -
+<a href="http://localhost:8080/magazzino/newsubcategory">Aggiungi una sottocategoria</a>
+<body>
+
+<h1>Lista Prodotti</h1>
+
+<ul>
+    <li th:each="product : ${products}">
+        Id:
+        <span th:text="${product.id}"></span> -
+        Nome:
+        <span th:text="${product.name}"></span> -
+        Categoria:
+        <span th:text="${product.subcategory.category.name}"></span> -
+        Sottocategoria:
+<!--        <a href="http://localhost:8080/magazzino/productsbysubcategory/{id}(id = ${product.subcategory.id})}">-->
+            <span th:text="${product.subcategory.name}"></span>
+<!--        </a>-->
+        -
+        Descrizione:
+        <span th:text="${product.shortDescription}"></span>
+        <a th:href="@{/magazzino/deleteproduct/{id}(id=${product.id})}"><button>Elimina</button></a>
+        <a th:href="@{/magazzino/editproduct/{id}(id=${product.id})}"><button>Edit</button></a>
+    </li>
+</ul>
+
+</body>
+</html>

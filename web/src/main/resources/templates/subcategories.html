@@ -1,0 +1,31 @@
+<html>
+<head>
+
+    <title>Magazzino MVC</title>
+</head>
+<a href="http://localhost:8080/magazzino/products">Lista prodotti</a> -
+<a href="http://localhost:8080/magazzino/stock">Lista stock</a> -
+<a href="http://localhost:8080/magazzino/newstock">Aggiungi stock</a> -
+<a href="http://localhost:8080/magazzino/categories">Lista categorie</a> -
+<a href="http://localhost:8080/magazzino/subcategories">Lista sottocategorie</a> -
+<a href="http://localhost:8080/magazzino/newproduct">Aggiungi un prodotto</a> -
+<a href="http://localhost:8080/magazzino/newcategory">Aggiungi una categoria</a> -
+<a href="http://localhost:8080/magazzino/newsubcategory">Aggiungi una sottocategoria</a>
+<body>
+
+<h1> Lista Sottocategorie </h1>
+<ul>
+    <li th:each="subcategory : ${subcategories}">
+
+        Id: <span th:text="${subcategory.id}"></span> -
+        Nome: <span th:text="${subcategory.name}"></span> -
+        Categoria: <span th:text="${subcategory.category.name}"></span> -
+        Descrizione: <span th:text="${subcategory.description}"></span>
+        <a th:href="@{/magazzino/deletesubcategory/{id}(id=${subcategory.id})}"><button>Elimina</button></a>
+        <a th:href="@{/magazzino/editsubcategory/{id}(id=${subcategory.id})}"><button>Edit</button></a>
+
+    </li>
+</ul>
+
+</body>
+</html>
