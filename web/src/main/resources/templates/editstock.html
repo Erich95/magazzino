@@ -24,7 +24,7 @@
 <!--    <select th:field="*{product.id}">-->
 <!--        <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>-->
 <!--    </select>-->
-    <button>Aggiorna</button>
+    <button onclick="return confirm('Vuoi aggiornare le info di magazzino di questo prodotto?')">Aggiorna</button>
 </form>
 </body>
 </html>

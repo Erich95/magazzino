@@ -23,7 +23,7 @@
     <select th:field="*{category.id}">
         <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
     </select>
-    <button>Aggiorna</button>
+    <button onclick="return confirm('Vuoi aggiornare la sottocategoria?')">Aggiorna</button>
 </form>
 </body>
 </html>

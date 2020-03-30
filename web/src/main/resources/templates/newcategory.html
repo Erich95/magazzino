@@ -19,7 +19,7 @@
     <input type="text" th:field="${category.name}" th:required="required">
     <p>Tax</p>
     <input type="number" th:field="${category.tax}" th:required="required">
-    <button>Salva</button>
+    <button onclick="return confirm('Confermi l'inserimento di una nuova categoria?')">Salva</button>
 </form>
 </body>
 </html>

@@ -38,25 +38,47 @@ public class CategoryService {
     public void addCategory(Category categoryToAdd) {
         boolean insertable = true;
         List<Category> categoriesList = (List<Category>) categories();
+//        categoryToAdd.setName(categoryToAdd.getName().replaceAll(" ", ""));
+        categoryToAdd.setName(categoryToAdd.getName().trim());
+
         for (Category cat : categoriesList) {
             if (cat.getName().equals(categoryToAdd.getName())) {
                 insertable = false;
             }
         }
+
         if(categoryToAdd.getName().equalsIgnoreCase("") || categoryToAdd.getTax() == 0) {
             insertable=false;
         }
-        if (insertable == true) {
+
+        if (insertable) {
             repository.save(categoryToAdd);
         }
     }
 
     public void updateCategory(long id , Category category){
-
         Optional<Category> toDelete = category(category.getId());
-        if (!category.getName().equalsIgnoreCase("") && category.getTax() > 0.0) {
+        boolean updatable = true;
+        List<Category> categoriesList = (List<Category>) categories();
+        category.setName(category.getName().trim());
+
+        for (Category cat : categoriesList) {
+            if (cat.getName().equals(category.getName())) {
+                updatable = false;
+            }
+        }
+
+        if (category.getName().equalsIgnoreCase("") || category.getTax() <= 0.0) {
+            updatable = false;
+        }
+
+        if (updatable) {
             toDelete.ifPresent(c -> repository.save(category));
         }
+
+//        if (!category.getName().equalsIgnoreCase("") && category.getTax() > 0.0) {
+//            toDelete.ifPresent(c -> repository.save(category));
+//        }
     }
 
     public void deleteCategory(long id) {

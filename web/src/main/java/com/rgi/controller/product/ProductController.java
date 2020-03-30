@@ -1,6 +1,7 @@
 package com.rgi.controller.product;
 
 
+import com.rgi.controller.warehouse.WarehouseController;
 import com.rgi.model.category.Category;
 import com.rgi.model.product.Product;
 import com.rgi.model.subcategory.Subcategory;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +37,9 @@ public class ProductController {
      @Autowired
      private WarehouseService warehouseService;
 
+     @Autowired
+     private WarehouseController warehouseController;
+
      @GetMapping("/products")
      public String products(Model model){
         List<Product> productsList=new ArrayList<Product>();
@@ -49,7 +54,9 @@ public class ProductController {
     public String newProduct(Model model) {
         Product newProduct = new Product();
         Warehouse warehouse = new Warehouse();
-        newProduct.setSubcategory(new Subcategory());
+        Subcategory subcategory = new Subcategory();
+        subcategory.setCategory(new Category());
+        newProduct.setSubcategory(subcategory);
         warehouse.setProduct(newProduct);
         model.addAttribute("stock", warehouse);
         model.addAttribute("subcategories", subcategoryService.subCategories());
@@ -57,15 +64,28 @@ public class ProductController {
     }
 
     @PostMapping("/newproduct")
-    public String newProduct(@ModelAttribute Warehouse warehouse, Model model) {
+    public RedirectView newProduct(@ModelAttribute Warehouse warehouse, Model model) {
+
         productService.addProduct(warehouse.getProduct());
         warehouseService.addWarehouseInfo(warehouse);
-//        model.addAttribute("wstock", warehouseService.warehouseInfos());
-        model.addAttribute("products", productService.products());
-//        model.addAttribute("categories", categoryService.categories());
-        model.addAttribute("subcategories", subcategoryService.subCategories());
-        return products(model);
+    if (warehouseService.addWarehouseInfo(warehouse)) {
+        return new RedirectView("http://localhost:8080/magazzino/products");
+    } else {
+        return new RedirectView("http://localhost:8080/magazzino/error");
     }
+    }
+
+//    @PostMapping("/newproduct")
+//    public String newProduct(@ModelAttribute Warehouse warehouse, Model model) {
+//
+//        productService.addProduct(warehouse.getProduct());
+//        warehouseService.addWarehouseInfo(warehouse);
+////        model.addAttribute("wstock", warehouseService.warehouseInfos());
+//        model.addAttribute("products", productService.products());
+////        model.addAttribute("categories", categoryService.categories());
+////        model.addAttribute("subcategories", subcategoryService.subCategories());
+//        return "products";
+//    }
 
          @GetMapping("/deleteproduct/{id}")
     public String deleteProduct(@PathVariable long id, Model model) {
@@ -77,10 +97,8 @@ public class ProductController {
          @GetMapping("/editproduct/{id}")
     public String editProduct(@PathVariable long id, @ModelAttribute Product productToEdit, Model model) {
          Product product = productService.product(id).orElse(null);
-
          model.addAttribute("prodToEdit", product);
          model.addAttribute("subcategories", subcategoryService.subCategories());
-
          return "editproduct";
          }
 
@@ -92,7 +110,7 @@ public class ProductController {
          }
 
          @GetMapping("/productsbysubcategory/{id}")
-    public String productsByCategory(@PathVariable int id, Model model) {
+    public String productsBySubcategory(@PathVariable int id, Model model) {
              Subcategory subcategory = subcategoryService.subCategory(id).orElse(null);
              List<Product> productsList=new ArrayList<Product>();
              productsList = (List<Product>)productService.products(id);
@@ -101,7 +119,13 @@ public class ProductController {
              return "productsbysubcategory";
          }
 
-
-
-
-}
+//         @GetMapping("/productsbycategory/{id}")
+//    public String productsByCategory(@PathVariable long id, Model model) {
+//         Category category = categoryService.category(id).orElse(null);
+//         List<Product> productList = new ArrayList<Product>();
+//         productList = (List<Product>)subcategoryService.productsByCategory(id);
+//         model.addAttribute("products", productList);
+//         model.addAttribute("category", category);
+//         return "productsbycategory";
+//         }
+ }

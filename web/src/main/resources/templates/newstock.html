@@ -22,7 +22,7 @@
     <select th:field="*{product.id}">
         <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.name}"></option>
     </select>
-    <button>Salva</button>
+    <button onclick="return confirm('Vuoi assegnare queste informazioni al prodotto selezionato?')">Salva</button>
 </form>
 </body>
 </html>

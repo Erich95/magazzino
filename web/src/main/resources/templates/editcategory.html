@@ -20,7 +20,7 @@
     <input type="text" th:value="${categoryToEdit.name}" th:field="${categoryToEdit.name}" th:required="required">
     <p>Tax</p>
     <input type="number" th:value="${categoryToEdit.tax}" th:field="${categoryToEdit.tax}" th:required="required">
-    <button>Aggiorna</button>
+    <button onclick="return confirm('Vuoi aggiornare la categoria?')">Aggiorna</button>
 </form>
 </body>
 </html>

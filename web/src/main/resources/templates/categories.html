@@ -20,13 +20,8 @@
         Id: <span th:text="${category.id}"></span>
         Nome: <span th:text="${category.name}"></span>
         Tax: <span th:text="${category.tax}"></span>
-        <a th:href="@{/magazzino/deletecategory/{id}(id=${category.id})}">
-            <button>Elimina</button>
-        </a> -
-        <a th:href="@{/magazzino/editcategory/{id}(id=${category.id})}">
-            <button>Edit</button>
-        </a>
-
+        <a th:href="@{/magazzino/deletecategory/{id}(id=${category.id})}"><button>Elimina</button></a>
+        <a th:href="@{/magazzino/editcategory/{id}(id=${category.id})}"><button>Edit</button></a>
     </li>
 </ul>
 

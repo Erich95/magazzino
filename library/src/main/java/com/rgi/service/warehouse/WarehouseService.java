@@ -1,14 +1,12 @@
 package com.rgi.service.warehouse;
 
 import com.rgi.dao.warehouse.WarehouseRepository;
-import com.rgi.model.product.Product;
 import com.rgi.model.warehouse.Warehouse;
 import com.rgi.service.product.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,10 +30,11 @@ public class WarehouseService {
         return warehouseRepository.findById(id);
     }
 
-    public void addWarehouseInfo(Warehouse warehouse) {
+    public boolean addWarehouseInfo(Warehouse warehouse) {
         if (warehouse.getBasePrice() > 0 && warehouse.getProduct() != null) {
             warehouseRepository.save(warehouse);
         }
+        return true;
     }
 
     public void updateWarehouseInfo(long id, Warehouse warehouse) {

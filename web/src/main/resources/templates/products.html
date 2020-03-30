@@ -17,16 +17,19 @@
 
 <ul>
     <li th:each="product : ${products}">
-        Id:
-        <span th:text="${product.id}"></span> -
+<!--        Id:-->
+<!--        <span th:text="${product.id}"></span> - -->
         Nome:
         <span th:text="${product.name}"></span> -
         Categoria:
-        <span th:text="${product.subcategory.category.name}"></span> -
+        <a th:href="@{/magazzino/productsbysubcategory/{id}(id=${product.subcategory.category.id})}">
+        <span th:text="${product.subcategory.category.name}"></span>
+            </a>
+        -
         Sottocategoria:
-<!--        <a href="http://localhost:8080/magazzino/productsbysubcategory/{id}(id = ${product.subcategory.id})}">-->
+        <a th:href="@{/magazzino/productsbysubcategory/{id}(id=${product.subcategory.id})}">
             <span th:text="${product.subcategory.name}"></span>
-<!--        </a>-->
+        </a>
         -
         Descrizione:
         <span th:text="${product.shortDescription}"></span>

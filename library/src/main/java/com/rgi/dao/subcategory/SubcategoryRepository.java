@@ -9,4 +9,6 @@ import java.util.Collection;
 public interface SubcategoryRepository extends CrudRepository<Subcategory, Long> {
     Collection<? extends Subcategory> findByCategoryId(long categoryId);
 
+    Collection<? extends Product> findProductsByCategoryId(long categoryId);
+
 }

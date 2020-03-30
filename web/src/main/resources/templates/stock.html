@@ -17,27 +17,28 @@
 
 <ul>
     <li th:each="stock : ${wstock}">
-        Id:
-        <span th:text="${stock.id}"></span> -
+<!--        Id:-->
+<!--        <span th:text="${stock.id}"></span> - -->
         Nome:
         <span th:text="${stock.product.name}"></span> -
         Categoria:
-        <span th:text="${stock.product.subcategory.category.name}"></span> -
+        <a th:href="@{/magazzino/productsbycategory/{id}(id=${stock.product.subcategory.category.id})}">
+        <span th:text="${stock.product.subcategory.category.name}"></span>
+            </a>
+        -
         Sottocategoria:
-        <span th:text="${stock.product.subcategory.name}"></span> -
+        <a th:href="@{/magazzino/productsbysubcategory/{id}(id=${stock.product.subcategory.id})}">
+            <span th:text="${stock.product.subcategory.name}"></span>
+            </a> -
 
         Descrizione:
-        <span th:text="${stock.product.shortDescription}"></span> -
+        <span maxlength="20" th:text="${stock.product.shortDescription}"></span> -
         Quantità:
         <span th:text="${stock.quantity}"></span> -
         Prezzo:
-        <span th:text="${stock.basePrice}"></span> -
-        <a th:href="@{/magazzino/deletestock/{id}(id=${stock.id})}">
-            <button>Elimina</button>
-        </a> -
-        <a th:href="@{/magazzino/editstock/{id}(id=${stock.id})}">
-            <button>Edit</button>
-        </a>
+        <span th:text="${stock.basePrice}"></span>
+        <a th:href="@{/magazzino/deletestock/{id}(id=${stock.id})}"><button>Elimina</button></a>
+        <a th:href="@{/magazzino/editstock/{id}(id=${stock.id})}"><button>Edit</button></a>
     </li>
 </ul>
 

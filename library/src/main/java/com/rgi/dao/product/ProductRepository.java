@@ -8,4 +8,6 @@ import java.util.Collection;
 public interface ProductRepository extends CrudRepository<Product,Long> {
 
     Collection<? extends Product> findBySubcategoryId(long subCategoryId);
+
+
 }
