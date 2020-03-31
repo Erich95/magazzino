@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +38,21 @@ public class CategoryController {
     }
 
     @PostMapping("/newcategory")
-    public String newCategory(@ModelAttribute Category category, Model model) {
-        categoryService.addCategory(category);
-        model.addAttribute("categories", categoryService.categories());
-        return categories(model);
+    public RedirectView newCategory(@ModelAttribute Category category, Model model) {
+//        categoryService.addCategory(category);
+       if (categoryService.addCategory(category)) {
+           return new RedirectView("http://localhost:8080/magazzino/categories");
+       }
+           return new RedirectView("http://localhost:8080/magazzino/error");
+
     }
+
+//    @PostMapping("/newcategory")
+//    public String newCategory(@ModelAttribute Category category, Model model) {
+//        categoryService.addCategory(category);
+//        model.addAttribute("categories", categoryService.categories());
+//        return categories(model);
+//    }
 
     @GetMapping("/deletecategory/{id}")
     public String deleteCategory(@PathVariable long id, Model model) {
@@ -58,11 +69,22 @@ public class CategoryController {
     }
 
     @PostMapping("/editcategory/{id}")
-    public String saveEditedCategory(@ModelAttribute Category editedCategory, Model model) {
+    public RedirectView saveEditedCategory(@ModelAttribute Category editedCategory, Model model) {
         Category category = editedCategory;
-        categoryService.updateCategory(editedCategory.getId(), editedCategory);
-        return categories(model);
+//        categoryService.updateCategory(editedCategory.getId(), editedCategory);
+        if (categoryService.updateCategory(editedCategory.getId(), editedCategory)) {
+            return new RedirectView("http://localhost:8080/magazzino/categories");
+        }
+    return new RedirectView("http://localhost:8080/magazzino/error");
+
     }
+
+//    @PostMapping("/editcategory/{id}")
+//    public String saveEditedCategory(@ModelAttribute Category editedCategory, Model model) {
+//        Category category = editedCategory;
+//        categoryService.updateCategory(editedCategory.getId(), editedCategory);
+//        return categories(model);
+//    }
 
 
 

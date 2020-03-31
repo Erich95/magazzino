@@ -1,6 +1,8 @@
 package com.rgi.model.warehouse;
 
 import com.rgi.model.product.Product;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 

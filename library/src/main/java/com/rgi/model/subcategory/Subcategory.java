@@ -1,6 +1,8 @@
 package com.rgi.model.subcategory;
 
 import com.rgi.model.category.Category;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,12 +43,21 @@ public class SubcategoryController {
     }
 
     @PostMapping("/newsubcategory")
-    public String newSubcategory(@ModelAttribute Subcategory subcategory, Model model) {
-        subcategoryService.addSubCategory(subcategory);
-        model.addAttribute("subcategories", subcategoryService.subCategories());
-        model.addAttribute("categories", categoryService.categories());
-        return subcategories(model);
+    public RedirectView newSubcategory(@ModelAttribute Subcategory subcategory, Model model) {
+//        subcategoryService.addSubCategory(subcategory);
+        if (subcategoryService.addSubCategory(subcategory)) {
+            return new RedirectView("http://localhost:8080/magazzino/subcategories");
+        }
+        return new RedirectView("http://localhost:8080/magazzino/error");
     }
+
+//    @PostMapping("/newsubcategory")
+//    public String newSubcategory(@ModelAttribute Subcategory subcategory, Model model) {
+//        subcategoryService.addSubCategory(subcategory);
+//        model.addAttribute("subcategories", subcategoryService.subCategories());
+//        model.addAttribute("categories", categoryService.categories());
+//        return subcategories(model);
+//    }
 
     @GetMapping("/editsubcategory/{id}")
     public String editSubcategory(@PathVariable long id, @ModelAttribute Subcategory subcategory, Model model) {
@@ -58,13 +68,23 @@ public class SubcategoryController {
     }
 
     @PostMapping("/editsubcategory/{id}")
-    public String saveEditedSubcategory(@ModelAttribute Subcategory editedSubcategory, Model model) {
+    public RedirectView saveEditedSubcategory(@ModelAttribute Subcategory editedSubcategory, Model model) {
         Subcategory subcategory1 = editedSubcategory;
-        subcategoryService.updateSubcategory(editedSubcategory.getId(), subcategory1);
-        return subcategories(model);
+//        subcategoryService.updateSubcategory(editedSubcategory.getId(), subcategory1);
+        if ( subcategoryService.updateSubcategory(editedSubcategory.getId(), subcategory1)) {
+            return new RedirectView("http://localhost:8080/magazzino/subcategories");
+        }
+        return new RedirectView("http://localhost:8080/magazzino/error");
     }
 
-    @GetMapping("/deletesubcategory")
+//    @PostMapping("/editsubcategory/{id}")
+//    public String saveEditedSubcategory(@ModelAttribute Subcategory editedSubcategory, Model model) {
+//        Subcategory subcategory1 = editedSubcategory;
+//        subcategoryService.updateSubcategory(editedSubcategory.getId(), subcategory1);
+//        return subcategories(model);
+//    }
+
+    @GetMapping("/deletesubcategory/{id}")
     public String deleteSubcategory(@PathVariable long id, Model model) {
         subcategoryService.deleteSubcategory(id);
         model.addAttribute("subcategories", subcategoryService.subCategories());

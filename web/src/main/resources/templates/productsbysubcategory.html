@@ -19,6 +19,8 @@
 <input type="hidden" th:value="${subcategory.id}" th:field="${subcategory.id}">
 <ul>
     <li th:each="product : ${products}">
+<!--        Conteggio:-->
+<!--        <span th:text="${products.length}"></span>-->
         Id:
         <span th:text="${product.id}"></span> -
         Nome:

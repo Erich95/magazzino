@@ -102,12 +102,22 @@ public class ProductController {
          return "editproduct";
          }
 
-         @PostMapping("/editproduct/{id}")
-    public String saveEditedProduct(@ModelAttribute Product editedProduct, Model model) {
-         Product product = editedProduct;
-         productService.updateProduct(editedProduct.getId(), editedProduct);
-         return products(model);
-         }
+    @PostMapping("/editproduct/{id}")
+    public RedirectView saveEditedProduct(@ModelAttribute Product editedProduct, Model model) {
+        Product product = editedProduct;
+        productService.updateProduct(editedProduct.getId(), editedProduct);
+        if (productService.updateProduct(editedProduct.getId(), editedProduct)) {
+            return new RedirectView("http://localhost:8080/magazzino/products");
+        }
+    return new RedirectView("http://localhost:8080/magazzino/error");
+    }
+
+//         @PostMapping("/editproduct/{id}")
+//    public String saveEditedProduct(@ModelAttribute Product editedProduct, Model model) {
+//         Product product = editedProduct;
+//         productService.updateProduct(editedProduct.getId(), editedProduct);
+//         return products(model);
+//         }
 
          @GetMapping("/productsbysubcategory/{id}")
     public String productsBySubcategory(@PathVariable int id, Model model) {

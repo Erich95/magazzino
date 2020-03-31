@@ -31,7 +31,7 @@ public class WarehouseService {
     }
 
     public boolean addWarehouseInfo(Warehouse warehouse) {
-        if (warehouse.getBasePrice() > 0 && warehouse.getProduct() != null) {
+        if (warehouse.getBasePrice() > 0 && warehouse.getProduct() != null && warehouse.getQuantity() >= 0.0) {
             warehouseRepository.save(warehouse);
         }
         return true;
@@ -39,7 +39,7 @@ public class WarehouseService {
 
     public void updateWarehouseInfo(long id, Warehouse warehouse) {
         Optional<Warehouse> toDelete = warehouseInfo(warehouse.getId());
-        if (warehouse.getBasePrice() > 0 && warehouse.getProduct() != null) {
+        if (warehouse.getBasePrice() > 0 && warehouse.getProduct() != null && warehouse.getQuantity() >= 0.0) {
             toDelete.ifPresent(w -> warehouseRepository.save(warehouse));
         }
     }
