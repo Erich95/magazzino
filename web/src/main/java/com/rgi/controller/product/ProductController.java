@@ -67,7 +67,7 @@ public class ProductController {
     public RedirectView newProduct(@ModelAttribute Warehouse warehouse, Model model) {
 
         productService.addProduct(warehouse.getProduct());
-        warehouseService.addWarehouseInfo(warehouse);
+//        warehouseService.addWarehouseInfo(warehouse);
     if (warehouseService.addWarehouseInfo(warehouse)) {
         return new RedirectView("http://localhost:8080/magazzino/products");
     } else {

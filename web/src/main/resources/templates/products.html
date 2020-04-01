@@ -16,6 +16,8 @@
 <h1>Lista Prodotti</h1>
 
 <ul>
+    <span> Numero di prodotti presenti: </span><span th:text="${#lists.size(products)}"></span>
+    <p></p>
     <li th:each="product : ${products}">
         Id:
         <span th:text="${product.id}"></span> -

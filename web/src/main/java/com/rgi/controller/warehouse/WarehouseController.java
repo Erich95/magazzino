@@ -46,15 +46,15 @@ public class WarehouseController {
         return "newstock";
     }
 
-    @PostMapping("/newstock")
-    public String newWarehouse(@ModelAttribute Warehouse warehouse, Model model) {
-        warehouseService.addWarehouseInfo(warehouse);
-        model.addAttribute("wstock", warehouseService.warehouseInfos());
-        model.addAttribute("products", productService.products());
-        model.addAttribute("subcategories", subcategoryService.subCategories());
-        model.addAttribute("categories", categoryService.categories());
-        return warehouseInfos(model);
-    }
+//    @PostMapping("/newstock")
+//    public String newWarehouse(@ModelAttribute Warehouse warehouse, Model model) {
+//        warehouseService.addWarehouseInfo(warehouse);
+//        model.addAttribute("wstock", warehouseService.warehouseInfos());
+//        model.addAttribute("products", productService.products());
+//        model.addAttribute("subcategories", subcategoryService.subCategories());
+//        model.addAttribute("categories", categoryService.categories());
+//        return warehouseInfos(model);
+//    }
 
     @GetMapping("/editstock/{id}")
     public String editwWarehouse(@PathVariable long id, @ModelAttribute Warehouse warehouseToEdit, Model model) {

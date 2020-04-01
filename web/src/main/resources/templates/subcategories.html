@@ -15,6 +15,8 @@
 
 <h1> Lista Sottocategorie </h1>
 <ul>
+    <span> Numero di sottocategorie presenti: </span><span th:text="${#lists.size(subcategories)}"></span>
+    <p></p>
     <li th:each="subcategory : ${subcategories}">
 
         Id: <span th:text="${subcategory.id}"></span> -

@@ -16,6 +16,8 @@
 <h1>Lista prodotti in Stock</h1>
 
 <ul>
+    <span> Numero di prodotti presenti: </span><span th:text="${#lists.size(wstock)}"></span>
+    <p></p>
     <li th:each="stock : ${wstock}">
 <!--        Id:-->
 <!--        <span th:text="${stock.id}"></span> - -->

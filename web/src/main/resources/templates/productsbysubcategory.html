@@ -18,9 +18,11 @@
 <form th:action="@{/magazzino/productsbysubcategory/{id}(id = ${subcategory.id})}" th:object="${subcategory}" method="get">
 <input type="hidden" th:value="${subcategory.id}" th:field="${subcategory.id}">
 <ul>
+    <span> Numero di prodotti presenti: </span><span th:text="${#lists.size(products)}"></span>
+    <p></p>
     <li th:each="product : ${products}">
 <!--        Conteggio:-->
-<!--        <span th:text="${products.length}"></span>-->
+<!--        <span th:text="${#lists.size(products)}"></span>-->
         Id:
         <span th:text="${product.id}"></span> -
         Nome:

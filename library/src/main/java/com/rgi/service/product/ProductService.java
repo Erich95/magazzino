@@ -35,7 +35,7 @@ public class ProductService {
         product.setName(product.getName().trim());
 
         for (Product prod : productList) {
-            if (prod.getName().equalsIgnoreCase(product.getName())
+                        if (prod.getName().equalsIgnoreCase(product.getName())
                     && prod.getSubcategory().getId() == product.getSubcategory().getId()
                     && prod.getShortDescription().equalsIgnoreCase(product.getShortDescription())) {
                 insertable = false;
@@ -47,9 +47,6 @@ public class ProductService {
         if (insertable) {
             repository.save(product);
         }
-//        if (!product.getName().equalsIgnoreCase("") && !product.getShortDescription().equalsIgnoreCase("") && product.getSubcategory().getId() != 0) {
-//            repository.save(product);
-//        }
     }
 
     public boolean updateProduct(long id, Product product){
