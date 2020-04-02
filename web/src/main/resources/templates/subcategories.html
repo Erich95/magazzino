@@ -23,6 +23,7 @@
         Nome: <span th:text="${subcategory.name}"></span> -
         Categoria: <span th:text="${subcategory.category.name}"></span> -
         Descrizione: <span th:text="${subcategory.description}"></span>
+        <a th:href="@{/magazzino/switchsubcategory/{id}(id=${subcategory.id})}"><button>Assegna i prodotti ad un'altra sottocategoria</button></a>
         <a th:href="@{/magazzino/deletesubcategory/{id}(id=${subcategory.id})}"><button>Elimina</button></a>
         <a th:href="@{/magazzino/editsubcategory/{id}(id=${subcategory.id})}"><button>Edit</button></a>
 

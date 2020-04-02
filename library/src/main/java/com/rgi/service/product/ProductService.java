@@ -77,4 +77,8 @@ public class ProductService {
         Optional<Product> product= repository.findById(id);
         product.ifPresent(value -> repository.delete(value));
     }
+
+    public void switchSubcategoriesOfProducts(long newSubcategoryId, long oldNewSubcategoryId) {
+        repository.switchSubcategoryBeforeDelete(newSubcategoryId, oldNewSubcategoryId);
+    }
 }

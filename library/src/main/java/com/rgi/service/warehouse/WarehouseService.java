@@ -23,6 +23,10 @@ public class WarehouseService {
         return (Collection<? extends Warehouse>)warehouseRepository.findAll();
     }
 
+//    public Collection<? extends Warehouse> warehouseProductInfo(long id) {
+//        return warehouseRepository.
+//    }
+
     public Optional<Warehouse> warehouseInfo(long id) {
         return warehouseRepository.findById(id);
     }
@@ -40,6 +44,9 @@ public class WarehouseService {
                 insertable = false;
                 break;
             }
+        }
+        if (insertable) {
+            warehouseRepository.save(warehouse);
         }
         if (updateQuantity) {
             insertable = false;

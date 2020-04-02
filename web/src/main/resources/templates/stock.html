@@ -24,14 +24,14 @@
         Nome:
         <span th:text="${stock.product.name}"></span> -
         Categoria:
-        <a th:href="@{/magazzino/productsbycategory/{id}(id=${stock.product.subcategory.category.id})}">
+<!--        <a th:href="@{/magazzino/productsbycategory/{id}(id=${stock.product.subcategory.category.id})}">-->
         <span th:text="${stock.product.subcategory.category.name}"></span>
-            </a>
+<!--            </a>-->
         -
         Sottocategoria:
-        <a th:href="@{/magazzino/productsbysubcategory/{id}(id=${stock.product.subcategory.id})}">
+<!--        <a th:href="@{/magazzino/productsbysubcategory/{id}(id=${stock.product.subcategory.id})}">-->
             <span th:text="${stock.product.subcategory.name}"></span>
-            </a> -
+<!--            </a> - -->
 
         Descrizione:
         <span maxlength="20" th:text="${stock.product.shortDescription}"></span> -

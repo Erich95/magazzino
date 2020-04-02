@@ -20,13 +20,14 @@ public class Product {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Subcategory subcategory;
 
+
     public void setId(long id) {
         this.id = id;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
+    }x
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;

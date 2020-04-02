@@ -1,5 +1,6 @@
 package com.rgi.controller.subcategory;
 
+import com.rgi.model.product.Product;
 import com.rgi.model.subcategory.Subcategory;
 import com.rgi.service.category.CategoryService;
 import com.rgi.service.product.ProductService;
@@ -90,6 +91,16 @@ public class SubcategoryController {
         model.addAttribute("subcategories", subcategoryService.subCategories());
         return subcategories(model);
     }
+
+//    @GetMapping("/switchsubcategory/{id}")
+//    public String switchSubcategories(@PathVariable int id, Model model) {
+//        Subcategory subcategory = subcategoryService.subCategory(id).orElse(null);
+//        List<Product> productsList=new ArrayList<Product>();
+//        productsList = (List<Product>)productService.products(id);
+//        model.addAttribute("products", productsList);
+//        model.addAttribute("subcategory", subcategory);
+//        return "switchsubcategory";
+//    }
 
 
 }
