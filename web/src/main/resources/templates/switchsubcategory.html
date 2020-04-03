@@ -13,10 +13,10 @@
 <a href="http://localhost:8080/magazzino/newsubcategory">Aggiungi una sottocategoria</a>
 <body>
 
-<h1>Lista Prodotti</h1>
+<h1>Lista prodotti della sottocategoria: <span th:text="${subcategory.name}"></span></h1>
 
-<form th:action="@{/magazzino/switchsubcategory/{id}(id = ${subcategory.id})}" th:object="${subcategory}" method="get">
-    <input type="hidden" th:value="${subcategory.id}" th:field="${subcategory.id}">
+<form th:action="@{/magazzino/switchsubcategory/{id}(id = ${subcategoryid})}" th:object="${subcategory}" method="post">
+<!--    <input type="hidden" th:value="${subcategory.id}" th:field="${subcategory.id}">-->
     <ul>
         <span> Numero di prodotti presenti: </span><span th:text="${#lists.size(products)}"></span>
         <p></p>
@@ -31,25 +31,24 @@
             <span th:text="${product.subcategory.name}"></span> -
             Descrizione:
             <span th:text="${product.shortDescription}"></span>
+
             <a th:href="@{/magazzino/deleteproduct/{id}(id=${product.id})}"><button>Elimina</button></a>
             <a th:href="@{/magazzino/editproduct/{id}(id=${product.id})}"><button>Edit</button></a>
         </li>
     </ul>
-<!--    <select th:field="*{subcat.id}">-->
-<!--        <option th:each="subcat : ${subcategories}" th:value="${subcat.id}" th:text="${subcat.name}"></option>-->
-<!--    </select>-->
+
+    <span> Seleziona la nuova sottocategoria di appartenenza per i prodotti soprastanti:  </span>
+
+
+    <select th:field="*{id}">
+        <option th:each="subcat : ${subcategories}" th:value="${subcat.id}" th:text="${subcat.name}"></option>
+    </select>
 
 
     <button onclick="return confirm('Vuoi assegnare una nuova sottocategoria a questi prodotti?')">Salva</button>
-</form>
 
-<form>
-    <ul>
-        <li th:each="subcat : ${subcategories}">
-            <select th:field="${subcat.id}">
-            </select>
-        </li>
-    </ul>
+<p></p>
+    <span> N.B.: Per eliminare una sottocategoria, essa non deve contenere prodotti. </span>
 </form>
 
 

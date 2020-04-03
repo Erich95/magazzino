@@ -132,17 +132,20 @@ public class ProductController {
     @GetMapping("/switchsubcategory/{id}")
     public String switchSubcategories(@PathVariable int id, Model model, @ModelAttribute ArrayList<Product> productsToEdit) {
         Subcategory subcategory = subcategoryService.subCategory(id).orElse(null);
+        long subcategoryId = subcategory.getId();
+        Subcategory subcategory1 = new Subcategory();
         List<Product> productsList=new ArrayList<Product>();
         productsList = (List<Product>)productService.products(id);
         model.addAttribute("products", productsList);
-        model.addAttribute("subcategory", subcategory);
+        model.addAttribute("subcategory", subcategory1);
+        model.addAttribute("subcategoryid", subcategoryId);
         model.addAttribute("subcategories", subcategoryService.subCategories());
         return "switchsubcategory";
     }
 
     @PostMapping("/switchsubcategory/{id}")
-    public RedirectView switchedSubcategories(@PathVariable int id, Model model, @ModelAttribute ArrayList<Product> productsToEdit, @ModelAttribute Subcategory subcategory) {
-productService.switchSubcategoriesOfProducts(id, subcategory.getId());
+    public RedirectView switchedSubcategories(@PathVariable int id, Model model,@ModelAttribute Subcategory subcategory) {
+        productService.switchSubcategoriesOfProducts(subcategory.getId(), id);
         return new RedirectView("http://localhost:8080/magazzino/subcategories");
     }
 
